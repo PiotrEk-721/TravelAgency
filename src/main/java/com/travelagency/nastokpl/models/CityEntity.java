@@ -46,5 +46,4 @@ public class CityEntity extends EntityMappedSuperclass {
 		CountryDTO countryDTO = this.country != null ? this.country.toDTO() : null;
 		return new CityDTO(this.getId(), countryDTO, airportDTOs, hotelDTOs);
 	}
-	// code
 }

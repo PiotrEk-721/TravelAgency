@@ -2,6 +2,9 @@ package com.travelagency.nastokpl.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.travelagency.nastokpl.dto.ParticipantDTO;
+import com.travelagency.nastokpl.dto.PurchaseDTO;
+import com.travelagency.nastokpl.dto.TripDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
@@ -12,6 +15,7 @@ import org.hibernate.annotations.Check;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "purchases")
@@ -48,5 +52,10 @@ public class PurchaseEntity {
 
 	@OneToMany(mappedBy = "purchase", fetch = FetchType.LAZY)
 	private List<ParticipantEntity> participant;
-	// code
+
+	public PurchaseDTO toDTO(){
+		TripDTO tripDTO = this.trip != null ? this.trip.toDTO() : null;
+		List<ParticipantDTO> participantDTOs = this.participant != null ? this.participant.stream().map(ParticipantEntity::toDTO).collect(Collectors.toList()) : null;
+		return new PurchaseDTO(this.getId(), tripDTO, participantDTOs);
+	}
 }

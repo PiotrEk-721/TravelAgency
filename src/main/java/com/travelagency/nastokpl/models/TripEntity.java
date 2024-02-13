@@ -2,6 +2,9 @@ package com.travelagency.nastokpl.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.travelagency.nastokpl.dto.CityDTO;
+import com.travelagency.nastokpl.dto.PurchaseDTO;
+import com.travelagency.nastokpl.dto.TripDTO;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Digits;
 import lombok.AllArgsConstructor;
@@ -11,6 +14,7 @@ import lombok.NoArgsConstructor;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Entity
 @Table(name = "trips")
@@ -62,6 +66,12 @@ public class TripEntity {
 	private CityEntity destinationCityId;
 
 	@OneToMany(mappedBy = "trip", cascade = CascadeType.ALL, orphanRemoval = true)
-	private List<PurchaseEntity> purchase;
-	// code
+	private List<PurchaseEntity> purchases;
+
+	public TripDTO toDTO(){
+		List<PurchaseDTO> purchaseDTOs = this.purchases != null ? this.purchases.stream().map(PurchaseEntity::toDTO).collect(Collectors.toList()) : null;
+		CityDTO departureCityDTO = this.departureCityId != null ? this.departureCityId.toDTO() : null;
+		CityDTO destinationCityDTO = this.destinationCityId != null ? this.destinationCityId.toDTO() : null;
+		return new TripDTO(this.getId(), purchaseDTOs, departureCityDTO, destinationCityDTO);
+	}
 }

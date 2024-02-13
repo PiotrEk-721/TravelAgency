@@ -11,5 +11,4 @@ public enum Authority implements GrantedAuthority {
 
 		return this.name();
 	}
-	// code
 }

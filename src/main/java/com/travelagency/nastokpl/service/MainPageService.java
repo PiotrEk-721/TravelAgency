@@ -63,6 +63,7 @@ public class MainPageService {
 
         LocalDate startDate = currentDate.minusDays(7);
 
-        return tripRepository.findTripsByPurchaseDateAfter(startDate);
+//        return tripRepository.findTripsByPurchaseDateAfter(startDate);
+        return null;
     }
 }

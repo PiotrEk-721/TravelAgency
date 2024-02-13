@@ -2,6 +2,7 @@ package com.travelagency.nastokpl.models;
 
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import com.travelagency.nastokpl.dto.ParticipantDTO;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -34,5 +35,8 @@ public class ParticipantEntity {
 	@ManyToOne
 	@JoinColumn(name = "purchase_id")
 	private PurchaseEntity purchase;
-	// code
+
+	public ParticipantDTO toDTO(){
+		return null;
+	}
 }
