@@ -36,12 +36,12 @@ public class ApplicationSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .cors(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(authorization -> authorization
-                        .requestMatchers("/js/**", "/images/**"
-                                , SecurityApiPaths.HOME_PAGE.getEndpoint()
-                                , SecurityApiPaths.SIGN_IN_PAGE.getEndpoint()
-                                , SecurityApiPaths.SIGN_IN_API.getEndpoint()
-                                , SecurityApiPaths.SIGN_OUT_API.getEndpoint()
-                                , SecurityApiPaths.REGISTER_PAGE.getEndpoint()
+                        .requestMatchers("/js/**", "/images/**",
+                                SecurityApiPaths.HOME_PAGE.getEndpoint(),
+                                SecurityApiPaths.SIGN_IN_PAGE.getEndpoint(),
+                                SecurityApiPaths.SIGN_IN_API.getEndpoint(),
+                                SecurityApiPaths.SIGN_OUT_API.getEndpoint(),
+                                SecurityApiPaths.REGISTER_PAGE.getEndpoint()
                                 /*, "/trips/**", "/search/**", "/purchase/**", "/home/**", "/**"*/)
                         .permitAll()
                         .anyRequest().authenticated()
